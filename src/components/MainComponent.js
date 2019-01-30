@@ -5,6 +5,7 @@ import Contact from "./ContactComponent";
 import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
 import DishDetail from "./DishdetailComponent";
+import AboutUs from "./AboutComponent";
 import { DISHES } from "../shared/dishes";
 import { COMMENTS } from "../shared/comments";
 import { LEADERS } from "../shared/leaders";
@@ -50,6 +51,10 @@ class Main extends Component {
       );
     };
 
+    const AboutUsPage = () => {
+      return <AboutUs leaders={this.state.leaders} />;
+    };
+
     return (
       <div>
         <Header />
@@ -62,6 +67,7 @@ class Main extends Component {
           />
           <Route path="/menu/:dishId" component={DishWithId} />
           <Route exact path="/contactus" component={Contact} />
+          <Route path="/aboutus" component={AboutUsPage} />
           <Redirect to="/home" />
         </Switch>
         <Footer />

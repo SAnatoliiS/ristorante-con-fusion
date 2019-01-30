@@ -9,7 +9,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
-function RenderMenuItem({ dish, onClick }) {
+function RenderMenuItem({ dish }) {
   return (
     <Card>
       <Link to={`/menu/${dish.id}`}>
@@ -22,7 +22,7 @@ function RenderMenuItem({ dish, onClick }) {
   );
 }
 
-const Menu = ({ dishes, onClick }) => {
+const Menu = ({ dishes }) => {
   const menu = dishes.map(dish => (
     <div key={dish.id} className="col-12 col-md-5 m-1">
       <RenderMenuItem dish={dish} />
