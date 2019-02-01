@@ -66,9 +66,13 @@ class CommentForm extends React.Component {
     isModalOpen: false
   };
   handleSubmit = values => {
-    console.log("Current State is: " + JSON.stringify(values));
-    alert("Current State is: " + JSON.stringify(values));
     this.toggleModal();
+    this.props.addComment(
+      this.props.dishId,
+      values.rating,
+      values.author,
+      values.comment
+    );
   };
   toggleModal = () => {
     this.setState({ isModalOpen: !this.state.isModalOpen });
@@ -159,7 +163,7 @@ class CommentForm extends React.Component {
     );
   }
 }
-const DishDetail = ({ dish, comments }) => {
+const DishDetail = ({ dish, comments, addComment }) => {
   if (dish == null) {
     return <div />;
   }
@@ -185,7 +189,7 @@ const DishDetail = ({ dish, comments }) => {
 
           <div className="col-12 col-md-5 m-1">
             <RenderComments comments={comments} />
-            <CommentForm />
+            <CommentForm addComment={addComment} dishId={dish.id} />
           </div>
         </div>
       </div>
