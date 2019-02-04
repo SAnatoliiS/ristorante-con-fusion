@@ -16,6 +16,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Control, LocalForm, Errors } from "react-redux-form";
+import { Loading } from "./LoadingComponent";
 
 const formatDate = date => {
   const options = {
@@ -163,8 +164,24 @@ class CommentForm extends React.Component {
     );
   }
 }
-const DishDetail = ({ dish, comments, addComment }) => {
-  if (dish == null) {
+const DishDetail = ({ dish, comments, addComment, isLoading, errMess }) => {
+  if (isLoading) {
+    return (
+      <div className="container">
+        <div className="row">
+          <Loading />
+        </div>
+      </div>
+    );
+  } else if (errMess) {
+    return (
+      <div className="container">
+        <div className="row">
+          <h4>{errMess}</h4>
+        </div>
+      </div>
+    );
+  } else if (dish == null) {
     return <div />;
   }
   return (
