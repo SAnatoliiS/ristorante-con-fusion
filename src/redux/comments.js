@@ -23,12 +23,7 @@ export const Comments = (
         comments: []
       };
     case ActionTypes.ADD_COMMENT:
-      const comment = {
-        ...action.payload,
-        id: state.comments.length,
-        date: new Date().toISOString()
-      };
-      return { ...state, comments: [...state.comments, comment] };
+      return { ...state, comments: [...state.comments, action.payload] };
     default:
       return state;
   }

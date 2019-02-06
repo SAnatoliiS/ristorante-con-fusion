@@ -69,7 +69,7 @@ class CommentForm extends React.Component {
   };
   handleSubmit = values => {
     this.toggleModal();
-    this.props.addComment(
+    this.props.postComment(
       this.props.dishId,
       values.rating,
       values.author,
@@ -165,7 +165,7 @@ class CommentForm extends React.Component {
     );
   }
 }
-const DishDetail = ({ dish, comments, addComment, isLoading, errMess }) => {
+const DishDetail = ({ dish, comments, postComment, isLoading, errMess }) => {
   if (isLoading) {
     return (
       <div className="container">
@@ -207,7 +207,7 @@ const DishDetail = ({ dish, comments, addComment, isLoading, errMess }) => {
 
           <div className="col-12 col-md-5 m-1">
             <RenderComments comments={comments} />
-            <CommentForm addComment={addComment} dishId={dish.id} />
+            <CommentForm postComment={postComment} dishId={dish.id} />
           </div>
         </div>
       </div>
