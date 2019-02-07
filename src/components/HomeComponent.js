@@ -55,7 +55,11 @@ const Home = props => {
           />
         </div>
         <div className="col-12 col-md m-1">
-          <RenderCard item={props.leaders} />
+          <RenderCard
+            item={props.leader}
+            isLoading={props.leadersIsLoading}
+            errMess={props.leaderErrMess}
+          />
         </div>
       </div>
     </div>

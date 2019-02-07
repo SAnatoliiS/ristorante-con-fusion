@@ -161,3 +161,61 @@ export const addPromos = promos => ({
   type: ActionTypes.ADD_PROMOS,
   payload: promos
 });
+
+export const addLiders = leaders => ({
+  type: ActionTypes.ADD_LEADERS,
+  payload: leaders
+});
+
+export const lidersLoading = () => ({
+  type: ActionTypes.LEADERS_LOADING
+});
+
+export const lidersFailed = errMess => ({
+  type: ActionTypes.LEADERS_FAILED,
+  payload: errMess
+});
+
+export const fetchLiders = () => dispatch => {
+  dispatch(lidersLoading());
+  return fetch(baseUrl + "leaders")
+    .then(response => response.json())
+    .then(leaders => dispatch(addLiders(leaders)))
+    .catch(error => dispatch(lidersFailed(error.message)));
+};
+
+export const postFeedback = feedback => dispatch => {
+  return fetch(baseUrl + "feedback", {
+    method: "POST",
+    body: JSON.stringify(feedback),
+    headers: {
+      "Content-Type": "application/json"
+    },
+    credentials: "same-origin"
+  })
+    .then(
+      response => {
+        if (response.ok) {
+          return response;
+        } else {
+          const error = new Error(
+            "Error " + response.status + ": " + response.statusText
+          );
+          error.response = response;
+          throw error;
+        }
+      },
+      error => {
+        throw new Error(error.message);
+      }
+    )
+    .then(response => response.json())
+    .then(feedback => {
+      console.log("Success received feedback:", feedback);
+      alert("Thank you for your feedback! " + JSON.stringify(feedback));
+    })
+    .catch(error => {
+      console.log("Post feedback ", error.message);
+      alert("Your feedback could not be posted\nError: " + error.message);
+    });
+};

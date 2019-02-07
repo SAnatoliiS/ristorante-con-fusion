@@ -39,8 +39,8 @@ const RenderComments = ({ comments }) => {
       <ul className="list-unstyled">
         <Stagger in>
           {comments.map(comment => (
-            <Fade in>
-              <li key={comment.id}>
+            <Fade key={comment.id} in>
+              <li>
                 <p>{comment.comment}</p>
                 <p>{`-- ${comment.author}, ${formatDate(comment.date)}`}</p>
               </li>
